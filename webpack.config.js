@@ -6,7 +6,7 @@ const deps = pkg.dependencies;
 const debug = process.env.NODE_DEBUG || false;
 const env = process.env.NODE_ENV || 'development';
 const src = path.join(__dirname, 'src');
-var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+// var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 
 const plugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
