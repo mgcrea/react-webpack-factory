@@ -1,6 +1,6 @@
 # React Webpack Factory
 
-[![project status](https://img.shields.io/badge/status-beta-blue.svg?style=flat)](https://github.com/mgcrea/angular-webpack-factory)
+[![project status](https://img.shields.io/badge/status-beta-blue.svg?style=flat)](https://github.com/mgcrea/react-webpack-factory)
 
 React Webpack Factory is a lean yet powerful starter-kit to build modern React applications.
 
@@ -13,7 +13,7 @@ Its goal is to closely follow today's best practices to bring both a safer and m
 1. Clone the project
 
     ```bash
-    git clone -o github https://github.com/mgcrea/angular-webpack-factory.git sandbox-app
+    git clone -o github https://github.com/mgcrea/react-webpack-factory.git sandbox-app
     cd sandbox-app
     ```
 
@@ -49,7 +49,7 @@ Its goal is to closely follow today's best practices to bring both a safer and m
 
 | **Name** | **Description** |
 |----------|-------|---|
-| [React](https://angularjs.org/) | Lets you write client-side web applications as if you had a smarter browser. |
+| [React](https://facebook.github.io/react/) | A JavaScript library for building user interfaces. |
 | [Bootstrap](http://getbootstrap.com/) | Sleek, intuitive, and powerful front-end framework for faster and easier web development. |
 
 ### Development
