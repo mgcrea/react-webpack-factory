@@ -1,0 +1,7 @@
+{
+  "extends": "mgcrea",
+  "parser": "babel-eslint",
+  "globals": {
+    __DEV__: false
+  }
+}
