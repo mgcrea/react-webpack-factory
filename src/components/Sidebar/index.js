@@ -1,17 +1,21 @@
+/* eslint-disable */
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import logoSvg from './logo.svg';
+import cx from 'classnames';
 
 export default class Navbar extends Component {
 
   static propTypes = {
-    title: PropTypes.string
+    title: PropTypes.string,
+    expanded: PropTypes.bool,
+    toggle: PropTypes.func
   };
 
   render() {
-    const {title} = this.props;
+    const {title, expanded, toggle} = this.props;
     return (
-      <nav className="sidebar-expanded sidebar-wrapper">
+      <nav className={cx('sidebar-wrapper', 'sidebar-' + (expanded ? 'expanded' : 'collapsed'))}>
         <div className="header-logo">
           <Link to="/" className="nav-link">
             <div dangerouslySetInnerHTML={{__html: logoSvg}}></div>
@@ -39,6 +43,11 @@ export default class Navbar extends Component {
             </Link>
           </li>
         </ul>
+        <div className="collapse-nav">
+          <a className="toggle-nav-collapse" title="Open/Close" onClick={toggle}>
+            <i className={cx('fa', 'fa-' + (expanded ? 'angle-left' : 'angle-right'))}></i>
+          </a>
+        </div>
       </nav>
     );
   }
