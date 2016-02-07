@@ -1,6 +1,6 @@
-/* eslint-disable */
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
+// http://squarespace.com/logo
 import logoSvg from './logo.svg';
 import cx from 'classnames';
 
