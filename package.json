@@ -21,14 +21,14 @@
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
-    "react-router": "^2.0.0-rc5",
+    "react-router": "^2.0.0",
     "redux": "^3.3.1",
     "redux-actions": "^0.9.1",
     "rxjs": "^5.0.0-beta.1",
     "whatwg-fetch": "^0.11.0"
   },
   "devDependencies": {
-    "babel-core": "^6.5.0",
+    "babel-core": "^6.5.1",
     "babel-eslint": "^5.0.0-beta6",
     "babel-loader": "^6.2.2",
     "babel-plugin-transform-class-properties": "^6.5.0",
@@ -57,7 +57,7 @@
     "karma-webpack": "^1.7.0",
     "mocha": "^2.4.5",
     "node-sass": "^3.4.2",
-    "redux-devtools": "^3.1.0",
+    "redux-devtools": "^3.1.1",
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.4",
     "rimraf": "^2.5.1",
@@ -67,6 +67,6 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.13",
     "webpack-dev-middleware": "^1.5.1",
-    "webpack-hot-middleware": "^2.6.4"
+    "webpack-hot-middleware": "^2.7.1"
   }
 }
