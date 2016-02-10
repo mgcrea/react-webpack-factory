@@ -1,6 +1,6 @@
 # React Webpack Factory
 
-[![project status](https://img.shields.io/badge/status-beta-blue.svg?style=flat)](https://github.com/mgcrea/react-webpack-factory)
+[![project status](https://img.shields.io/badge/status-beta-blue.svg?style=flat)](https://github.com/mgcrea/react-webpack-factory) [![dependencies status](https://img.shields.io/david/mgcrea/react-webpack-factory.svg?style=flat)](https://david-dm.org/mgcrea/react-webpack-factory) [![devDependencies status](https://img.shields.io/david/dev/mgcrea/react-webpack-factory.svg?style=flat)](https://david-dm.org/mgcrea/react-webpack-factory#info=devDependencies)
 
 React Webpack Factory is a lean yet powerful starter-kit to build modern React applications.
 
