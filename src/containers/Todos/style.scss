@@ -1,5 +1,51 @@
-.content {
-  color: #222;
+/*
+ * Projects top area
+ */
+
+.top-area {
+  border-bottom: 1px solid #EEE;
+
+  ul.nav-links {
+    display: inline-block;
+    width: 50%;
+    margin-bottom: 0px;
+    border-bottom: none;
+  }
+
+  .projects-search-form {
+    width: 50%;
+    display: inline-block;
+    float: right;
+    padding-top: 11px;
+    text-align: right;
+
+    .btn-green {
+      margin-left: 10px;
+      float: right;
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    .projects-search-form {
+      padding-top: 15px;
+    }
+  }
+}
+
+.projects-search-form {
+  padding: $gl-padding 0;
+  padding-bottom: 0;
+  margin-bottom: 0px;
+
+  input {
+    display: inline-block;
+    width: calc(100% - 151px);
+  }
+
+  .btn {
+    display: inline-block;
+    width: 135px;
+  }
 }
 
 

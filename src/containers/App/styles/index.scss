@@ -1,6 +1,11 @@
-@import "./fonts.scss";
-@import "./variables.scss";
-@import "./mixins.scss";
+@import "./framework/fonts.scss";
+@import "./framework/variables.scss";
+@import "./framework/mixins.scss";
+
+@import "./framework/avatar.scss";
+@import "./framework/buttons.scss";
+@import "./framework/layout.scss";
+@import "./framework/nav.scss";
 
 $font-family-sans-serif: $regular_font;
 $font-family-monospace:  $monospace_font;
@@ -21,3 +26,7 @@ $screen-md-max: #{map-get($grid-breakpoints, 'lg') - 1};
 @import "./../../../components/Navbar/style.scss";
 @import "./../../../components/Sidebar/style.scss";
 @import "./../../../containers/Todos/style.scss";
+
+.content {
+  color: #222;
+}

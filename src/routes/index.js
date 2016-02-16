@@ -1,20 +1,21 @@
 import React from 'react';
-import {Router, Route, hashHistory} from 'react-router';
+import {Router, Route, Redirect, hashHistory} from 'react-router';
 
 import App from 'containers/App';
-import Todos from 'containers/Todos';
+import todoRoutes from 'containers/Todos/routes';
 import Counter from 'components/Counter';
+
+const NotFoundView = () => (
+  <div>Not Found!</div>
+);
 
 export default (store) => (
   <Router history={hashHistory}>
+    <Route path="/404" component={NotFoundView} />
     <Route path="/" component={App}>
-      <Route title="Todos" path="todos" component={Todos} />
-      <Route title="Issues" path="issues" component={Counter} />
+      {todoRoutes(store)}
+      <Route path="issues" title="Issues" component={Counter} />
     </Route>
+    <Redirect from="*" to="/404" />
   </Router>
 );
-
-/*
-      <Route path='/404' component={NotFoundView} />
-      <Redirect from='*' to='/404' />
-*/

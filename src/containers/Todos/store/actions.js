@@ -1,7 +1,6 @@
 import * as types from './types';
 
 export function addTodo(text) {
-  console.warn('addTodo', text);
   return {type: types.ADD_TODO, text};
 }
 

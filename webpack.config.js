@@ -6,6 +6,7 @@ const deps = pkg.dependencies;
 const debug = process.env.NODE_DEBUG || false;
 const env = process.env.NODE_ENV || 'development';
 const src = path.join(__dirname, 'src');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 
 const plugins = [
@@ -26,6 +27,7 @@ if (env !== 'test') {
   //   filename: 'manifest.json',
   //   manifestVariable: 'webpackManifest'
   // }));
+  plugins.push(new ExtractTextPlugin('bundle.css'));
 }
 
 plugins.push(new webpack.ProvidePlugin({
@@ -62,7 +64,8 @@ module.exports = {
     path: path.join(__dirname, env === 'production' ? 'dist' : '.tmp'),
     pathinfo: true,
     // publicPath: '/',
-    publicPath: 'http://localhost:3000/',
+    // see http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
+    publicPath: 'http://MacBookPro-Olivier.local:3000/',
     filename: '[name].js'
   },
   plugins,
