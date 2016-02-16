@@ -1,6 +1,7 @@
 
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
+import TodoItem from './../TodoItem';
 
 export default class TodoList extends Component {
 
@@ -21,7 +22,7 @@ export default class TodoList extends Component {
   }
 
   render() {
-    // const {todos, actions} = this.props;
+    const {todos, actions} = this.props;
     return (
       <div className="content">
 
@@ -51,31 +52,7 @@ export default class TodoList extends Component {
 
         <div className="projects-list-holder">
           <ul className="projects-list">
-            <li className="project-row">
-              <a className="project" href="/carlipa/node-player">
-                <div className="dash-project-avatar">
-                  <div className="avatar project-avatar s46 identicon">N</div>
-                </div>
-                <span className="project-full-name">
-                  <span className="namespace-name">
-                    carlipa /
-                  </span>
-                  <span className="project-name filter-title">
-                    node-player
-                  </span>
-                </span>
-              </a>
-              <div className="project-controls">
-                <a className="ci-status-link ci-status-icon-success" title="Build passed" data-toggle="tooltip" data-placement="left" href="/carlipa/node-player/commit/7f882499e46ece2f377ff2f858a27577bd8bedd4/builds">
-                  <i className="fa fa-check fa-fw"></i>
-                </a>
-                &nbsp;
-                <span>
-                  <i className="fa fa-star"></i>
-                  1
-                </span>
-              </div>
-            </li>
+            {todos.map(todo => <TodoItem key={todo.id} todo={todo} {...actions} />)}
             <li className="bottom center">
               <div className="light">
                 22 of 119 projects displayed.

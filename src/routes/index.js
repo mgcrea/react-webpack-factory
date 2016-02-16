@@ -1,5 +1,5 @@
 import React from 'react';
-import {Router, Route, Redirect, hashHistory} from 'react-router';
+import {Router, Route, Redirect, browserHistory} from 'react-router';
 
 import App from 'containers/App';
 import todoRoutes from 'containers/Todos/routes';
@@ -10,7 +10,7 @@ const NotFoundView = () => (
 );
 
 export default (store) => (
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path="/404" component={NotFoundView} />
     <Route path="/" component={App}>
       {todoRoutes(store)}

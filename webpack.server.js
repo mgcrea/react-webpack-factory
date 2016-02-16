@@ -3,6 +3,7 @@
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
+var modRewrite = require('connect-modrewrite');
 var browserSync = require('browser-sync');
 var config = require('./webpack.config');
 
@@ -23,7 +24,10 @@ browserSync({
         // Set to false to display a list of each file that is being bundled.
         noInfo: config.noInfo
       }),
-      webpackHotMiddleware(bundler)
+      webpackHotMiddleware(bundler),
+      modRewrite([
+        '!\\.[\\w\\?\\=]+$ /index.html [L]'
+      ]),
     ]
   },
   // no need to watch '*.js' here, webpack will take care of it for us,
