@@ -25,7 +25,7 @@ $screen-md-max: #{map-get($grid-breakpoints, 'lg') - 1};
 
 @import "./../../../components/Navbar/style.scss";
 @import "./../../../components/Sidebar/style.scss";
-@import "./../../../containers/Todos/style.scss";
+@import "./../../../containers/Users/style.scss";
 
 .content {
   color: #222;

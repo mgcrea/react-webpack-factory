@@ -15,7 +15,7 @@ export default class Navbar extends Component {
   render() {
     const {title, expanded, toggle} = this.props;
     return (
-      <nav className={cx('sidebar-wrapper', 'sidebar-' + (expanded ? 'expanded' : 'collapsed'))}>
+      <nav className={cx('sidebar-wrapper', `sidebar-${expanded ? 'expanded' : 'collapsed'}`)}>
         <div className="header-logo">
           <Link to="/" className="nav-link">
             <div dangerouslySetInnerHTML={{__html: logoSvg}}></div>
@@ -26,10 +26,10 @@ export default class Navbar extends Component {
         </div>
         <ul className="nav nav-sidebar">
           <li>
-            <Link to="/todos" className="nav-link" activeClassName="active">
-              <i className="fa fa-home fa-fw"></i>
+            <Link to="/users" className="nav-link" activeClassName="active">
+              <i className="fa fa-user fa-fw"></i>
               <span>
-                Todos
+                Users
               </span>
             </Link>
           </li>
@@ -45,7 +45,7 @@ export default class Navbar extends Component {
         </ul>
         <div className="collapse-nav">
           <a className="toggle-nav-collapse" title="Open/Close" onClick={toggle}>
-            <i className={cx('fa', 'fa-' + (expanded ? 'angle-left' : 'angle-right'))}></i>
+            <i className={cx('fa', `fa-${expanded ? 'angle-left' : 'angle-right'}`)}></i>
           </a>
         </div>
       </nav>
