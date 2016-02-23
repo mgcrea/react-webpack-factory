@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import {routeReducer} from 'react-router-redux';
+import {routerReducer} from 'react-router-redux';
 
-import todos from 'containers/Todos/store/reducers';
+import users from 'containers/Users/store/reducers';
 
 export default combineReducers({
-  routing: routeReducer,
-  todos
+  routing: routerReducer,
+  users
 });
