@@ -1,0 +1,10 @@
+import React from 'react';
+import {Route, IndexRoute} from 'react-router';
+import UserContainer, {UserList, UserForm} from 'containers/Users';
+
+export default (store) => (
+  <Route path="users" title="UserIndex" component={UserContainer}>
+    <IndexRoute title="UsersList" component={UserList} />
+    <Route path="new" title="UsersForm" component={UserForm} />
+  </Route>
+);

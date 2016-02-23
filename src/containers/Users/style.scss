@@ -1,0 +1,108 @@
+/*
+ * Projects top area
+ */
+
+.users-content {
+
+  $baseName: "user";
+  $pluralName: "users";
+
+  .top-area {
+    border-bottom: 1px solid #EEE;
+
+    ul.nav-links {
+      display: inline-block;
+      width: 50%;
+      margin-bottom: 0px;
+      border-bottom: none;
+    }
+
+    .users-search-form {
+      width: 50%;
+      display: inline-block;
+      float: right;
+      padding-top: 11px;
+      text-align: right;
+
+      .btn-green {
+        margin-left: 10px;
+        float: right;
+      }
+    }
+
+    @media (max-width: $screen-xs-max) {
+      .users-search-form {
+        padding-top: 15px;
+      }
+    }
+  }
+
+  .users-search-form {
+    padding: $gl-padding 0;
+    padding-bottom: 0;
+    margin-bottom: 0px;
+
+    input {
+      display: inline-block;
+      width: calc(100% - 151px);
+    }
+
+    .btn {
+      display: inline-block;
+      width: 135px;
+    }
+  }
+
+
+  /*
+   * Projects list rendered on dashboard and user page
+   */
+
+  .users-list {
+    @include basic-list;
+
+    .user-row {
+      padding: $gl-padding 0;
+      border-color: $table-border-color;
+
+      &.no-description {
+        .user {
+          line-height: 44px;
+        }
+      }
+
+      .user-full-name {
+        @include str-truncated;
+        font-weight: 600;
+        color: #4c4e54;
+      }
+
+      .user-controls {
+        float: right;
+        color: $gl-gray;
+        line-height: 45px;
+        color: #7f8fa4;
+
+        a:hover {
+          text-decoration: none;
+        }
+      }
+
+      .user-description {
+        color: #7f8fa4;
+
+        p {
+          @include str-truncated;
+          margin-bottom: 0;
+          color: #7f8fa4;
+        }
+      }
+    }
+
+    .bottom {
+      padding-top: $gl-padding;
+      padding-bottom: 0;
+    }
+  }
+
+}

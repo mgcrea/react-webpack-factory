@@ -1,33 +1,32 @@
 import React, {Component, PropTypes} from 'react';
+import cx from 'classnames';
 
-export default class TodoItem extends Component {
+export default class UserItem extends Component {
 
   static propTypes = {
     actions: PropTypes.object,
-    todo: PropTypes.object
+    user: PropTypes.object
   };
 
   render() {
-    const {todo} = this.props;
-    console.warn('todo', todo, this.props.actions);
+    const {user} = this.props;
+    console.warn('user', user, this.props.actions);
     return (
       <li className="project-row">
         <a className="project" href="/carlipa/node-player">
           <div className="dash-project-avatar">
             <div className="avatar project-avatar s46 identicon">N</div>
           </div>
-          <span className="project-full-name">
-            <span className="namespace-name">
-              carlipa /
-            </span>
-            <span className="project-name filter-title">
-              node-player
-            </span>
+          <span className="user-name">
+            {user.name}
           </span>
+          &nbsp;(<span className="user-email">
+            {user.email}
+          </span>)
         </a>
         <div className="project-controls">
-          <a className="ci-status-link ci-status-icon-success" title="Build passed" data-toggle="tooltip" data-placement="left" href="/carlipa/node-player/commit/7f882499e46ece2f377ff2f858a27577bd8bedd4/builds">
-            <i className="fa fa-check fa-fw"></i>
+          <a className="ci-status-link ci-status-icon-success">
+            <i className={cx('fa fa-fw', `fa-${user.completed ? 'check' : 'remove'}`)}></i>
           </a>
           &nbsp;
           <span>
@@ -42,9 +41,9 @@ export default class TodoItem extends Component {
 
 /*
       <tr>
-        <td>{todo.id}</td>
-        <td>{todo.text}</td>
-        <td>{todo.completed ? 'V' : 'X'}</td>
+        <td>{user.id}</td>
+        <td>{user.text}</td>
+        <td>{user.completed ? 'V' : 'X'}</td>
         <td>
           <div className="btn-group btn-group-sm" role="group" aria-label="Small button group">
             <button type="button" className="btn btn-secondary">Left</button>
