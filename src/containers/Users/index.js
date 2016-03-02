@@ -7,7 +7,8 @@ import React, {Component, PropTypes, cloneElement} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as userActions from './store/actions';
-import {routeActions} from 'react-router-redux';
+import {routerActions} from 'react-router-redux';
+console.warn(routerActions);
 
 class UserContainer extends Component {
 
@@ -17,7 +18,10 @@ class UserContainer extends Component {
     history: PropTypes.object,
     actions: PropTypes.object,
     router: PropTypes.object,
-    users: PropTypes.array
+    users: PropTypes.shape({
+      items: PropTypes.array,
+      updatedAt: PropTypes.number
+    })
   };
 
   render() {
@@ -35,6 +39,6 @@ export default connect(
   state => ({users: state.users}),
   dispatch => ({
     actions: bindActionCreators({...userActions}, dispatch),
-    router: bindActionCreators({...routeActions}, dispatch)
+    router: bindActionCreators({...routerActions}, dispatch)
   })
 )(UserContainer);

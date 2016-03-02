@@ -7,7 +7,10 @@ export default class UserList extends Component {
 
   static propTypes = {
     actions: PropTypes.object,
-    users: PropTypes.array
+    users: PropTypes.shape({
+      items: PropTypes.array,
+      updatedAt: PropTypes.number
+    })
   };
 
   // static defaultProps = {
@@ -18,6 +21,12 @@ export default class UserList extends Component {
 
   state = {
     search: ''
+  }
+
+  componentDidMount() {
+    const {actions} = this.props;
+    // dispatch(fetchPostsIfNeeded(selectedSubreddit))
+    actions.fetchUsers();
   }
 
   handleInputChange(ev) {
@@ -34,7 +43,7 @@ export default class UserList extends Component {
     const {search} = this.state;
 
     const searchRegExp = new RegExp(search, 'i');
-    const filteredUsers = users.filter(user => user.name.match(searchRegExp));
+    const filteredUsers = users.items.filter(user => user.name.match(searchRegExp));
 
     return (
       <div>

@@ -20,7 +20,8 @@ export default class UserForm extends Component {
   handleSubmit(ev) {
     ev.preventDefault();
     const {router, actions} = this.props;
-    actions.addTodo(this.state.text);
+    actions.createUser(this.state);
+    console.warn('router', router);
     router.push('/users');
   }
 
@@ -62,7 +63,7 @@ export default class UserForm extends Component {
 
               <div className="form-actions">
                 <input type="submit" value="Create user" className="btn btn-create" />
-                <input type="text" value="Cancel" className="btn btn-cancel" href="/admin/users" />
+                <a className="btn btn-cancel" href="/admin/users">Cancel</a>
               </div>
 
             </form>

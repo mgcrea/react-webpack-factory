@@ -31,8 +31,8 @@ if (env !== 'test') {
 }
 
 plugins.push(new webpack.ProvidePlugin({
-  Promise: 'exports?global.Promise!es6-promise',
-  fetch: 'exports?self.fetch!whatwg-fetch'
+  Promise: 'exports?global.Promise!es6-promise'
+  // fetch: 'exports?self.fetch!whatwg-fetch'
 }));
 
 switch (env) {
@@ -55,7 +55,7 @@ switch (env) {
 module.exports = {
   debug,
   devtool: env === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
-  noInfo: env === 'test' ? true : false,
+  noInfo: env === 'test',
   entry: {
     bundle: './src/index',
     vendor: ['react', 'react-dom', 'redux', 'redux-actions', 'react-redux', 'react-router'].concat(env === 'development' ? ['webpack-hot-middleware/client?quiet=false', 'babel-preset-react-hmre', 'redux-devtools', 'redux-devtools-log-monitor', 'redux-devtools-dock-monitor'] : [])
