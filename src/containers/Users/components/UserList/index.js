@@ -41,6 +41,7 @@ export default class UserList extends Component {
   render() {
     const {users, actions} = this.props;
     const {search} = this.state;
+    console.warn('users', users);
 
     const searchRegExp = new RegExp(search, 'i');
     const filteredUsers = users.items.filter(user => user.name.match(searchRegExp));
@@ -71,6 +72,8 @@ export default class UserList extends Component {
             </Link>
           </div>
         </div>
+
+        <div>{users.isFetching ? 'IS_FETCHING' : 'NOT_FETCHING'}</div>
 
         <div className="users-list-holder">
           <ul className="users-list">

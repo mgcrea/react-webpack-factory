@@ -7,12 +7,6 @@ export default class UserForm extends Component {
     actions: PropTypes.object
   };
 
-  // state = {
-  //   name: '',
-  //   name: '',
-  //   name: ''
-  // }
-
   handleInputChange(ev) {
     this.setState({[ev.target.name]: ev.target.value});
   }
@@ -20,9 +14,9 @@ export default class UserForm extends Component {
   handleSubmit(ev) {
     ev.preventDefault();
     const {router, actions} = this.props;
-    actions.createUser(this.state);
-    console.warn('router', router);
-    router.push('/users');
+    actions.createUser(this.state).then(() => {
+      router.push('/users');
+    });
   }
 
   render() {

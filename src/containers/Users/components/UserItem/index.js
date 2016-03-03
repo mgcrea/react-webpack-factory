@@ -1,19 +1,25 @@
 import React, {Component, PropTypes} from 'react';
+import {Link} from 'react-router';
 import cx from 'classnames';
 
 export default class UserItem extends Component {
 
   static propTypes = {
-    actions: PropTypes.object,
+    deleteUser: PropTypes.func,
     user: PropTypes.object
   };
 
+  delete(ev) {
+    const {user, deleteUser} = this.props;
+    deleteUser(user.id, {confirm: ev.target.dataset.confirm});
+  }
+
   render() {
     const {user} = this.props;
-    console.warn('user', user, this.props.actions);
+    console.warn('actions', this.props);
     return (
       <li className="project-row">
-        <a className="project" href="/carlipa/node-player">
+        <Link to={`/users/${user.id}`} className="user">
           <div className="dash-project-avatar">
             <div className="avatar project-avatar s46 identicon">N</div>
           </div>
@@ -23,16 +29,18 @@ export default class UserItem extends Component {
           &nbsp;(<span className="user-email">
             {user.email}
           </span>)
-        </a>
+        </Link>
         <div className="project-controls">
           <a className="ci-status-link ci-status-icon-success">
             <i className={cx('fa fa-fw', `fa-${user.completed ? 'check' : 'remove'}`)}></i>
           </a>
           &nbsp;
-          <span>
-            <i className="fa fa-star"></i>
-            1
-          </span>
+          <div className="btn-toolbar" role="toolbar">
+            <div className="btn-group" role="group">
+              <a className="btn btn-sm btn-primary" href="/admin/users/alorho/edit">Edit</a>
+              <a className="btn btn-sm btn-danger" data-confirm={`USER ${user.name} WILL BE REMOVED! Are you sure?`} onClick={::this.delete}>Destroy</a>
+            </div>
+          </div>
         </div>
       </li>
     );
