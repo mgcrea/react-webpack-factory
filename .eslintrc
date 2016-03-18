@@ -3,5 +3,9 @@
   "parser": "babel-eslint",
   "globals": {
     __DEV__: false
+  },
+  "rules": {
+    "no-unused-vars": 1,
+    "react/prefer-stateless-function": 1
   }
 }

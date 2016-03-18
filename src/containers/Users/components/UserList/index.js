@@ -1,23 +1,22 @@
-
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
-import UserItem from './../UserItem';
+import UserListItem from './../UserListItem';
+import style from './style';
 
-export default class UserList extends Component {
+// import Table from 'react-toolbox/lib/table';
+import {List, ListItem, ListSubHeader, ListDivider, ListCheckbox, Button} from 'react-toolbox';
+import {decorate as decorateWithProgressBar} from 'components/ProgressBar';
+
+class UserList extends Component {
 
   static propTypes = {
+    router: PropTypes.object,
     actions: PropTypes.object,
     users: PropTypes.shape({
       items: PropTypes.array,
       updatedAt: PropTypes.number
     })
   };
-
-  // static defaultProps = {
-  //   users: [
-  //     {id: '0123', title: 'foo', isDone: false}
-  //   ]
-  // };
 
   state = {
     search: ''
@@ -39,54 +38,36 @@ export default class UserList extends Component {
   }
 
   render() {
-    const {users, actions} = this.props;
+    const {users, router, actions} = this.props;
     const {search} = this.state;
-    console.warn('users', users);
 
     const searchRegExp = new RegExp(search, 'i');
     const filteredUsers = users.items.filter(user => user.name.match(searchRegExp));
 
     return (
-      <div>
-
-        <div className="top-area">
-          <ul className="nav-links">
-            <li className="active">
-              <a title="Home" className="shortcuts-activity" data-placement="right" href="/dashboard/users">Your Projects
-              </a>
-            </li>
-            <li className="">
-              <a title="Starred Projects" data-placement="right" href="/dashboard/users/starred">Starred Projects
-              </a>
-            </li>
-            <li className="hidden-xs">
-              <a title="Explore" data-placement="right" href="/explore">Explore Projects
-              </a>
-            </li>
-          </ul>
-          <div className="users-search-form">
-            <input className="users-list-filter form-control hidden-xs" type="search" name="search" value={search} onChange={::this.handleInputChange} placeholder="Filter by name..." spellCheck="false" />
-            <Link to="/users/new" className="btn btn-green" activeClassName="active">
-              <i className="fa fa-plus"></i>
-              New Project
-            </Link>
-          </div>
-        </div>
-
-        <div>{users.isFetching ? 'IS_FETCHING' : 'NOT_FETCHING'}</div>
-
-        <div className="users-list-holder">
-          <ul className="users-list">
-            {filteredUsers.map(user => <UserItem key={user.id} user={user} {...actions} />)}
-            <li className="bottom center">
-              <div className="light">
-                {filteredUsers.length} of {users.length} users displayed.
-                <a className="js-expand" href="#">Show all</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <section className={style.root}>
+        <Link to="/users/new" className={style.addUser}>
+          <Button icon="add" floating accent mini />
+        </Link>
+        <List selectable ripple>
+          <ListSubHeader caption="Admin users" />
+          {filteredUsers.map(user => <UserListItem key={user.id} user={user} router={router} {...actions} />)}
+        {/* <ListSubHeader caption="Configuration" />
+          <ListCheckbox checked caption="Notify new comics" legend="You will receive a notification when a new one is published" />
+          <ListItem caption="Contact the publisher" leftIcon="send" />
+          <ListItem caption="Remove this publication" leftIcon="delete" /> */}
+        </List>
+      </section>
     );
   }
 }
+
+export default decorateWithProgressBar({shouldBeActive: props => !props.users.items.length, getProgress: props => {
+  const {users} = props;
+  if (users.items === null) {
+    return 25;
+  } else if (users.isFetching) {
+    return 50;
+  }
+  return 100;
+}})(UserList);

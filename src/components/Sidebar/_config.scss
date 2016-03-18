@@ -1,0 +1,20 @@
+$theme-blue: hsl(203, 63%, 44%);
+$theme-charcoal: hsl(213, 16%, 23%);
+$theme-graphite: hsl(0, 0%, 53%);
+$theme-gray: hsl(0, 0%, 21%);
+$theme-green: hsl(166, 98%, 30%);
+$theme-violet: hsl(255, 33%, 40%);
+
+$theme-color: $theme-green;
+$background-color: darken($theme-color, 4%);
+$active-item-background-color: darken($theme-color, 7%);
+$top-background-color: $theme-color;
+$top-border-color: $theme-color;
+
+
+// color: #555555; <-- default
+$text-color: desaturate(lighten($theme-color, 50%), 56%);
+
+$sidebar_width: 230px;
+$sidebar_collapsed_width: 62px;
+$header_height: 58px; // global

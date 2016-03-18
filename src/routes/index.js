@@ -6,7 +6,7 @@ import App from 'containers/App';
 import userRoutes from 'containers/Users/routes';
 import Counter from 'components/Counter';
 
-const NotFoundView = () => (
+const NotFoundView = props => (
   <div>Not Found!</div>
 );
 
@@ -15,6 +15,7 @@ export default (store) => {
   return (
     <Router history={history}>
       <Route path="/404" component={NotFoundView} />
+      <Redirect from="/" to="/users" />
       <Route path="/" component={App}>
         {userRoutes(store)}
         <Route path="issues" title="Issues" component={Counter} />

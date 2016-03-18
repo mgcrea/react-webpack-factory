@@ -1,4 +1,3 @@
-
 import UserList from './components/UserList';
 import UserForm from './components/UserForm';
 export {UserList, UserForm};
@@ -8,7 +7,6 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as userActions from './store/actions';
 import {routerActions} from 'react-router-redux';
-console.warn(routerActions);
 
 class UserContainer extends Component {
 
@@ -27,7 +25,7 @@ class UserContainer extends Component {
   render() {
     const {children, actions, router, users} = this.props;
     return (
-      <section className="content users-content">
+      <section>
         {cloneElement(children, {actions, router, users})}
       </section>
     );

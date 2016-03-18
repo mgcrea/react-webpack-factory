@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars,spaced-comment */
 import React, {Component, PropTypes} from 'react';
 import Navbar from 'components/Navbar';
 import Sidebar from 'components/Sidebar';
-import cx from 'classnames';
-import './styles/index.scss';
+// import cx from 'classnames';
+import style from './style';
 
 export default class App extends Component {
 
@@ -22,20 +23,15 @@ export default class App extends Component {
   }
 
   render() {
-    // const {sidebarExpanded} = this.state;
     const {children, routes} = this.props;
     return (
-      <div>
-        <Navbar title="Dashboard" routes={routes} />
-        <div className={cx('page-with-sidebar', `page-sidebar-${this.state.sidebarExpanded ? 'expanded' : 'collapsed'}`)}>
-          <Sidebar title="Carlipa Online" expanded={this.state.sidebarExpanded} toggle={::this.toggleSidebar} />
-          <div className="content-wrapper">
-            <div className="container-fluid container-limited">
-              {children}
-            </div>
-          </div>
+      <section className={style.root}>
+        <Sidebar className={style.sidebar} title="Carlipa Online" expanded={this.state.sidebarExpanded} toggle={::this.toggleSidebar} />
+        <div className={style.content}>
+          <Navbar title="Dashboard" routes={routes} />
+          {children}
         </div>
-      </div>
+      </section>
     );
   }
 

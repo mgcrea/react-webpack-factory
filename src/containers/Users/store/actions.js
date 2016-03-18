@@ -11,12 +11,13 @@ const headers = {
 
 // Data related
 const isObject = maybeObj => typeof maybeObj === 'object';
-const mapItems = items => items.map(item => {
+const mapItem = item => {
   if (isObject(item._id)) {
     item.id = item._id.$oid;
   }
   return item;
-});
+};
+const mapItems = items => items.map(mapItem);
 
 // Interface related
 const confirmAsync = (text) => new Promise((resolve, reject) => {
@@ -45,6 +46,16 @@ export function fetchUsers() {
       .then(res => res.json())
       .then(items => dispatch({type: types.FETCH_USERS, status: 'resolved', items: mapItems(items), receivedAt: Date.now()}))
       .catch(err => dispatch({type: types.FETCH_USERS, status: 'rejected', err, receivedAt: Date.now()}));
+  };
+}
+
+export function fetchUser(id) {
+  return dispatch => {
+    dispatch({type: types.FETCH_USER, status: 'pending'});
+    return fetch(`https://api.mlab.com/api/1/databases/sandbox/collections/${collection}/${id}?apiKey=${apiKey}`)
+      .then(res => res.json())
+      .then(item => dispatch({type: types.FETCH_USER, status: 'resolved', item: mapItem(item), receivedAt: Date.now()}))
+      .catch(err => dispatch({type: types.FETCH_USER, status: 'rejected', err, receivedAt: Date.now()}));
   };
 }
 

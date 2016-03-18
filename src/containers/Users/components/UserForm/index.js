@@ -1,69 +1,94 @@
 import React, {Component, PropTypes} from 'react';
+import style from './style';
 
-export default class UserForm extends Component {
+import Input from 'react-toolbox/lib/input';
+import Button from 'react-toolbox/lib/button';
+
+import {decorate as decorateWithProgressBar} from 'components/ProgressBar';
+
+class UserForm extends Component {
 
   static propTypes = {
     router: PropTypes.object,
-    actions: PropTypes.object
+    actions: PropTypes.object,
+    params: PropTypes.object,
+    users: PropTypes.shape({
+      item: PropTypes.object,
+      isFetchingItem: PropTypes.bool
+    })
   };
 
-  handleInputChange(ev) {
+  state = {
+    name: '',
+    username: '',
+    email: ''
+  }
+
+  componentWillMount() {
+    const {actions, params, users} = this.props;
+    if (params.userId) {
+      if (users.item && users.item._id.$oid === params.userId) {
+        this.setState(users.item);
+        return;
+      }
+      actions.fetchUser(params.userId).then(action => {
+        this.setState(action.item);
+      });
+    }
+  }
+
+  handleInputChange(value, ev) {
     this.setState({[ev.target.name]: ev.target.value});
   }
 
   handleSubmit(ev) {
+    console.warn('submit');
     ev.preventDefault();
-    const {router, actions} = this.props;
-    actions.createUser(this.state).then(() => {
-      router.push('/users');
-    });
+    // const {router, actions} = this.props;
+    // actions.createUser(this.state).then(() => {
+    //   router.push('/users');
+    // });
+  }
+
+  handleKeyPress(ev) {
+    console.warn('keypress', ev);
+  }
+
+  handleCancel(ev) {
+    const {router} = this.props;
+    ev.preventDefault();
+    router.goBack();
   }
 
   render() {
     return (
-      <section>
-        <h3 className="page-title">New Project</h3>
-        <div className="project-edit-container">
-          <div className="project-edit-content">
-            <form className="new_project form-horizontal" onSubmit={::this.handleSubmit}>
-
-              {/* <input type="text" name="text" value={this.state.text} onChange={::this.handleInputChange} placeholder="Your name" autoFocus />
-            <input type="submit" value="Post" /> */}
-
-              <fieldset>
-                <legend>Account</legend>
-                <div className="form-group row">
-                  <label className="col-sm-2 form-control-label" htmlFor="user_name">Name</label>
-                  <div className="col-sm-10">
-                    <input required autoComplete="off" className="form-control" type="text" name="name" id="user_name" onChange={::this.handleInputChange} />
-                    <span className="help-inline">* required</span>
-                  </div>
-                </div>
-                <div className="form-group row">
-                  <label className="col-sm-2 form-control-label" htmlFor="user_username">Username</label>
-                  <div className="col-sm-10">
-                    <input required autoComplete="off" className="form-control" type="text" name="username" id="user_username" onChange={::this.handleInputChange} />
-                    <span className="help-inline">* required</span>
-                  </div>
-                </div>
-                <div className="form-group row">
-                  <label className="col-sm-2 form-control-label" htmlFor="user_email">Email</label>
-                  <div className="col-sm-10">
-                    <input required autoComplete="off" className="form-control" type="text" name="email" id="user_email" onChange={::this.handleInputChange} />
-                    <span className="help-inline">* required</span>
-                  </div>
-                </div>
-              </fieldset>
-
-              <div className="form-actions">
-                <input type="submit" value="Create user" className="btn btn-create" />
-                <a className="btn btn-cancel" href="/admin/users">Cancel</a>
-              </div>
-
-            </form>
-          </div>
-        </div>
+      <section className={style.root}>
+        <form onSubmit={::this.handleSubmit} onKeyPress={::this.handleKeyPress}>
+          <Input type="text" name="name" label="Name" icon="event" value={this.state.name} onChange={::this.handleInputChange} autoComplete="off" maxLength={32} />
+          <Input type="text" name="username" label="Username" icon="event" value={this.state.username} onChange={::this.handleInputChange} autoComplete="off" maxLength={16} />
+          <Input type="email" name="email" label="Email address" icon="email" value={this.state.email} onChange={::this.handleInputChange} autoComplete="off" />
+          <footer>
+            <Button type="submit" icon="check" label="Submit" raised primary />
+            <Button type="button" icon="close" label="Cancel" onClick={::this.handleCancel} raised />
+          </footer>
+        </form>
       </section>
     );
   }
 }
+
+export default decorateWithProgressBar({
+  shouldBeActive: props => {
+    const {params, users} = props;
+    return !!params.userId && (!users.item || users.item._id.$oid !== params.userId);
+  },
+  getProgress: props => {
+    const {users} = props;
+    if (users.item === null) {
+      return 25;
+    } else if (users.isFetchingItem) {
+      return 50;
+    }
+    return 100;
+  }
+})(UserForm);

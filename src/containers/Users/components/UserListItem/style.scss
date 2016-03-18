@@ -1,0 +1,18 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  .listItem {
+    order: 0;
+    flex: 1 0 auto;
+  }
+  .linkMenu {
+    order: 1;
+    flex: 0 0 auto;
+  }
+  .iconMenu {
+    order: -1;
+    flex: 0 0 auto;
+  }
+}

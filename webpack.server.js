@@ -4,13 +4,14 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var modRewrite = require('connect-modrewrite');
-var browserSync = require('browser-sync');
+var browserSync = require('browser-sync').create();
 var config = require('./webpack.config');
 
 var bundler = webpack(config);
+console.log(config.output);
 
 // Run Browsersync and use middleware for Hot Module Replacement
-browserSync({
+browserSync.init({
   notify: process.argv.indexOf('--notify') !== -1,
   open: process.argv.indexOf('--no-open') === -1,
   server: {
@@ -33,6 +34,7 @@ browserSync({
   // no need to watch '*.js' here, webpack will take care of it for us,
   // including full page reloads if HMR won't work
   files: [
+    // config.output.publicPath + '/bundle.css',
     'src/*.html'
   ]
 });

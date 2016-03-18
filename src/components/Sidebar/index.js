@@ -1,10 +1,13 @@
+/* eslint-disable no-unused-vars,spaced-comment */
+
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 // http://squarespace.com/logo
 import logoSvg from './logo.svg';
 import cx from 'classnames';
+import style from './style';
 
-export default class Navbar extends Component {
+export default class Sidebar extends Component {
 
   static propTypes = {
     title: PropTypes.string,
@@ -13,41 +16,47 @@ export default class Navbar extends Component {
   };
 
   render() {
-    const {title, expanded, toggle} = this.props;
+    const props = this.props;
+    const {title, expanded, toggle} = props;
+
+    const rootClassName = cx(style.root, {
+      [style.expanded]: props.expanded,
+      [style.collapsed]: !props.expanded
+    }, props.className);
+
     return (
-      <nav className={cx('sidebar-wrapper', `sidebar-${expanded ? 'expanded' : 'collapsed'}`)}>
-        <div className="header-logo">
-          <Link to="/" className="nav-link">
-            <div dangerouslySetInnerHTML={{__html: logoSvg}}></div>
-            <div className="gitlab-text-container">
-              <h3>{title}</h3>
-            </div>
+      <nav className={rootClassName}>
+        <header className={style.header}>
+          <Link to="/" className={style.sidebarLink}>
+            <span dangerouslySetInnerHTML={{__html: logoSvg}}></span>
+            <h3>{title}</h3>
           </Link>
-        </div>
-        <ul className="nav nav-sidebar">
-          <li>
-            <Link to="/users" className="nav-link" activeClassName="active">
+        </header>
+        <ul className={style.list}>
+          <li className={style.activeListItem}>
+            <Link to="/users" activeClassName={style.activeListItem}>
               <i className="fa fa-user fa-fw"></i>
-              <span>
-                Users
-              </span>
+              <span>Users</span>
             </Link>
           </li>
           <li>
-            <Link to="/issues" className="nav-link" activeClassName="active">
+            <Link to="/issues" activeClassName={style.activeListItem}>
               <i className="fa fa-exclamation-circle fa-fw"></i>
-              <span>
-                Issues
-                <span className="count">0</span>
-              </span>
+              <span>Issues<span className="count">0</span></span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/counter" activeClassName={style.activeListItem}>
+              <i className="material-icons md-18">account_balance_wallet</i>
+              <span>Issues<span className="count">0</span></span>
             </Link>
           </li>
         </ul>
-        <div className="collapse-nav">
+        <footer className={style.footer}>
           <a className="toggle-nav-collapse" title="Open/Close" onClick={toggle}>
             <i className={cx('fa', `fa-${expanded ? 'angle-left' : 'angle-right'}`)}></i>
           </a>
-        </div>
+        </footer>
       </nav>
     );
   }

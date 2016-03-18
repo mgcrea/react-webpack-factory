@@ -13,19 +13,19 @@ $font-family-monospace:  $monospace_font;
 
 $enable-flex: true;
 @import "~bootstrap/scss/bootstrap.scss";
-$fa-font-path: "~font-awesome/fonts";
-@import "~font-awesome/scss/font-awesome.scss";
+// $fa-font-path: "~font-awesome/fonts";
+// @import "~font-awesome/scss/font-awesome.scss";
 
-@import "./theme.scss";
+@import "./gitlab_theme.scss";
 
 // Retro-compatibility with Bootstrap3 styles
 $screen-xs-max: #{map-get($grid-breakpoints, 'sm') - 1};
 $screen-sm-max: #{map-get($grid-breakpoints, 'md') - 1};
 $screen-md-max: #{map-get($grid-breakpoints, 'lg') - 1};
 
-@import "./../../../components/Navbar/style.scss";
-@import "./../../../components/Sidebar/style.scss";
-@import "./../../../containers/Users/style.scss";
+// @import "./../../../components/Navbar/style.scss";
+// @import "./../../../components/Sidebar/style.scss";
+// @import "./../../../containers/Users/style.scss";
 
 .content {
   color: #222;

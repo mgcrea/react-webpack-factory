@@ -5,7 +5,9 @@ const initialState = {
   isFetching: false,
   didInvalidate: true,
   lastUpdated: 0,
-  items: []
+  items: [],
+  item: null,
+  isFetchingItem: false
 };
 
 export default (state = initialState, action) => {
@@ -41,6 +43,25 @@ export default (state = initialState, action) => {
             didInvalidate: false,
             items: action.items,
             lastUpdated: action.receivedAt
+          });
+        default:
+          return;
+      }
+
+    case types.FETCH_USER:
+      switch (action.status) {
+        case 'pending':
+          console.warn('pending');
+          return Object.assign({}, state, {
+            isFetchingItem: true
+          });
+        case 'resolved':
+          console.warn('resolved');
+          return Object.assign({}, state, {
+            isFetchingItem: false,
+            item: action.item
+            // items: action.items,
+            // lastUpdated: action.receivedAt
           });
         default:
           return;

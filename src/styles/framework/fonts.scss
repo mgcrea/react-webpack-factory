@@ -23,3 +23,8 @@
   font-weight: 700;
   src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(./fonts/SourceSansPro-Bold.ttf.woff2) format('woff2'), url(./fonts/SourceSansPro-Bold.ttf.woff) format('woff');
 }
+
+body {
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+}
