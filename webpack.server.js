@@ -1,40 +1,35 @@
-/* eslint-disable */
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const modRewrite = require('connect-modrewrite');
+const browserSync = require('browser-sync').create();
+const config = require('./webpack.config');
 
-var webpack = require('webpack');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
-var modRewrite = require('connect-modrewrite');
-var browserSync = require('browser-sync').create();
-var config = require('./webpack.config');
-
-var bundler = webpack(config);
-console.log(config.output);
+const compiler = webpack(config);
+compiler.plugin('done', () => {
+  browserSync.reload('bundle.css');
+});
 
 // Run Browsersync and use middleware for Hot Module Replacement
 browserSync.init({
+  port: process.env.NODE_PORT || 9000,
   notify: process.argv.indexOf('--notify') !== -1,
-  open: process.argv.indexOf('--no-open') === -1,
+  open: process.argv.indexOf('--open') !== -1,
   server: {
-    baseDir: ['src'],
+    baseDir: './src',
     middleware: [
-      webpackDevMiddleware(bundler, {
+      webpackDevMiddleware(compiler, {
         // Dev middleware can't access config, so we provide publicPath
         publicPath: config.output.publicPath,
         // Pretty colored output
         stats: {colors: true},
         // Set to false to display a list of each file that is being bundled.
-        noInfo: config.noInfo
+        noInfo: true || config.noInfo
       }),
-      webpackHotMiddleware(bundler),
+      webpackHotMiddleware(compiler),
       modRewrite([
         '!\\.[\\w\\?\\=]+$ /index.html [L]'
-      ]),
+      ])
     ]
-  },
-  // no need to watch '*.js' here, webpack will take care of it for us,
-  // including full page reloads if HMR won't work
-  files: [
-    // config.output.publicPath + '/bundle.css',
-    'src/*.html'
-  ]
+  }
 });

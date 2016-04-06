@@ -1,5 +1,4 @@
 
-@import "./../../styles/base";
 @import "./config";
 
 .root {
@@ -7,118 +6,36 @@
   overflow-x: hidden;
   overflow-y: auto;
   flex-direction: column;
-  // position: fixed;
-  // z-index: 99;
-  // top: 0;
-  // bottom: 0;
-  // left: 0;
 
-  // min-height: 100vh;
+  width: $sidebar_width;
 
   transition: width .3s;
 
-  background: $background-color;
-  width: $sidebar_width;
-
-  // flex: 0 0 $sidebar_width;
-
-  .header {
-    display: flex;
-    flex-direction: row;
-
-    width: $sidebar_width; // needed for smooth transition
-    min-height: $header_height;
-    padding-top: 4px;
-
-    transition: background-color .3s;
-
-    border-bottom: 1px solid transparent;
-    background-color: $top-background-color;
-
-    align-items: center;
-
-    a {
-      display: flex;
-
-      width: 100%;
-      padding-left: 22px;
-
-      transition: padding-left .3s;
-      h3 {
-        margin: 0;
-        margin-left: 14px;
-
-        transition: opacity .3s;
-
-        color: $text-color;
-
-        font-size: 19px;
-        font-weight: 500;
-        line-height: 41px;
-      }
-    }
-    &:hover {
-      border-color: $top-border-color;
-      background: $background-color;
-    }
-  }
+  background: $background_color;
 
   ul.list {
-    flex: 1;
     padding-top: 14px;
-    li {
-      // transition-duration: .3s;
-      // transition-property: 'background-color';
-      position: relative;
 
-      display: block;
-
-      width: $sidebar_width; // needed for smooth transition
-      a {
-        display: block;
-
-        padding: 7px 15px;
-        padding-left: 23px;
-
-        text-decoration: none;
-
-        color: $text-color;
-        outline: none;
-
-        font-size: 15px;
-        font-weight: 600;
-        line-height: 24px;
-        i {
-          margin-right: 13px;
-        }
-      }
-      &:hover {
-        background: $active-item-background-color;
-      }
-      &.activeListItem {
-        background: $active-item-background-color;
-        a {
-          color: white;
-        }
-      }
-    }
+    flex: 1;
   }
 
   .footer {
-    min-height: 40px;
-
-    text-align: center;
+    display: flex;
 
     color: white;
-    border-color: $top-border-color;
+    border-color: $top_border_color;
     border-top: 1px solid transparent;
-    background-color: $top-background-color;
+    background-color: $top_background_color;
+
+    flex: 0 0 40px;
+    align-items: center;
+    justify-content: center;
 
     // Footer should be invisible on small screens
-    @media(min-width: $screen-md-max) {
+    @media(min-width: $screen_md_max) {
       transition: opacity .3s .3s;
     }
-    @media (max-width: $screen-md-max) {
+    @media (max-width: $screen_md_max) {
       visibility: hidden;
 
       transition: opacity .3s .3s, visibility 0s .6s;
@@ -127,51 +44,21 @@
     }
 
     a {
-      display: block;
+      display: flex;
 
       cursor: pointer;
 
-      line-height: 40px;
+      align-items: center;
     }
   }
 
 }
 
 @mixin expanded-sidebar {
-
-  // padding-left: $sidebar_width;
-  //
-  // .sidebar-wrapper {
-  //   width: $sidebar_width;
-  //
-  //   .nav-sidebar {
-  //     width: $sidebar_width;
-  //   }
-  //
-  //   .nav-sidebar li a{
-  //     width: 230px;
-  //
-  //     &.back-link {
-  //       i {
-  //         opacity: 0;
-  //       }
-  //     }
-  //   }
-  // }
 }
 
 @mixin collapsed-sidebar {
   width: $sidebar_collapsed_width;
-
-  .header a {
-    width: auto;
-    padding-left: ($sidebar_collapsed_width - 36) / 2;
-    h3 {
-      visibility: hidden;
-
-      opacity: 0;
-    }
-  }
 
   ul.list {
     li {
@@ -183,54 +70,9 @@
       }
     }
   }
-
-  // padding-left: $sidebar_collapsed_width;
-  //
-  // .sidebar-wrapper {
-  //   width: $sidebar_collapsed_width;
-  //
-  //   .header-logo {
-  //     width: $sidebar_collapsed_width;
-  //
-  //     a {
-  //       padding-left: ($sidebar_collapsed_width - 36) / 2;
-  //
-  //       .gitlab-text-container {
-  //         display: none;
-  //       }
-  //     }
-  //   }
-  //
-  //   .nav-sidebar {
-  //     width: $sidebar_collapsed_width;
-  //
-  //     li {
-  //       width: auto;
-  //
-  //       a {
-  //         span {
-  //           display: none;
-  //         }
-  //       }
-  //     }
-  //   }
-  //
-  //   .collapse-nav a {
-  //     width: $sidebar_collapsed_width;
-  //   }
-  //
-  //   .sidebar-user {
-  //     padding-left: ($sidebar_collapsed_width - 36) / 2;
-  //     width: $sidebar_collapsed_width;
-  //
-  //     .username {
-  //       display: none;
-  //     }
-  //   }
-  // }
 }
 
-@media (max-width: $screen-md-max) {
+@media (max-width: $screen_md_max) {
   .root.collapsed {
     @include collapsed-sidebar;
   }
@@ -239,7 +81,7 @@
   }
 }
 
-@media(min-width: $screen-md-max) {
+@media(min-width: $screen_md_max) {
   .root.collapsed {
     @include collapsed-sidebar;
   }

@@ -1,0 +1,17 @@
+
+$grid_breakpoints: (
+  // Extra small screen / phone
+  xs: 0,
+  // Small screen / phone
+  sm: 544px,
+  // Medium screen / tablet
+  md: 768px,
+  // Large screen / desktop
+  lg: 992px,
+  // Extra large screen / wide desktop
+  xl: 1200px
+) !default;
+
+$screen_xs_max: #{map-get($grid_breakpoints, 'sm') - 1};
+$screen_sm_max: #{map-get($grid_breakpoints, 'md') - 1};
+$screen_md_max: #{map-get($grid_breakpoints, 'lg') - 1};

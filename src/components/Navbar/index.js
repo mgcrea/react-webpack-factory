@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars,spaced-comment */
 import React, {Component, PropTypes} from 'react';
-// import AppBar from 'react-toolbox/lib/app_bar';
 import cx from 'classnames';
 import style from './style';
-
+import Counter from 'components/Counter';
 
 export default class Navbar extends Component {
 
@@ -27,6 +25,7 @@ export default class Navbar extends Component {
     return (
       <header className={rootClassName}>
         <h1 className={style.title}>{currentRoute.title}</h1>
+        <Counter increment={2} />
         <ul className={style.nav}>
           <li className="visible-sm visible-xs">
             <a title="Search" data-toggle="tooltip" data-placement="bottom" data-container="body" href="/search">

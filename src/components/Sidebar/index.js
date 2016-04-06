@@ -1,11 +1,10 @@
-/* eslint-disable no-unused-vars,spaced-comment */
 
 import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-router';
-// http://squarespace.com/logo
-import logoSvg from './logo.svg';
 import cx from 'classnames';
 import style from './style';
+
+import SidebarHeader from './components/SidebarHeader';
+import SidebarLink from './components/SidebarLink';
 
 export default class Sidebar extends Component {
 
@@ -26,35 +25,16 @@ export default class Sidebar extends Component {
 
     return (
       <nav className={rootClassName}>
-        <header className={style.header}>
-          <Link to="/" className={style.sidebarLink}>
-            <span dangerouslySetInnerHTML={{__html: logoSvg}}></span>
-            <h3>{title}</h3>
-          </Link>
-        </header>
+        <SidebarHeader title={title} expanded={expanded} />
         <ul className={style.list}>
-          <li className={style.activeListItem}>
-            <Link to="/users" activeClassName={style.activeListItem}>
-              <i className="fa fa-user fa-fw"></i>
-              <span>Users</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/issues" activeClassName={style.activeListItem}>
-              <i className="fa fa-exclamation-circle fa-fw"></i>
-              <span>Issues<span className="count">0</span></span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/counter" activeClassName={style.activeListItem}>
-              <i className="material-icons md-18">account_balance_wallet</i>
-              <span>Issues<span className="count">0</span></span>
-            </Link>
-          </li>
+          <SidebarLink to="/media" label="Library" icon="video_library" />
+          <SidebarLink to="/devices" label="Devices" icon="important_devices" />
+          <SidebarLink to="/users" label="Users" icon="account_circle" />
+          <SidebarLink to="/issues" label="Issues" icon="report_problem" />
         </ul>
         <footer className={style.footer}>
           <a className="toggle-nav-collapse" title="Open/Close" onClick={toggle}>
-            <i className={cx('fa', `fa-${expanded ? 'angle-left' : 'angle-right'}`)}></i>
+            <i className="material-icons md-18">{`chevron_${expanded ? 'left' : 'right'}`}</i>
           </a>
         </footer>
       </nav>

@@ -1,0 +1,76 @@
+@import "./../../config";
+
+.root {
+  display: flex;
+  flex-direction: row;
+
+  width: $sidebar_width; // needed for smooth transition
+  padding-top: 4px;
+
+  transition: background-color .3s;
+
+  border-bottom: 1px solid transparent;
+  background-color: $top_background_color;
+
+  flex: 0 0 $header_height;
+  align-items: center;
+
+  a {
+    display: flex;
+
+    width: 100%;
+    padding-left: 22px;
+
+    transition: padding-left .3s;
+    h3 {
+      margin: 0;
+      margin-left: 14px;
+
+      transition: opacity .3s;
+
+      color: $text_color;
+
+      font-size: 19px;
+      font-weight: 500;
+      line-height: 41px;
+    }
+  }
+  &:hover {
+    border-color: $top_border_color;
+    background: $background_color;
+  }
+}
+
+@mixin expanded-sidebar {
+
+}
+
+@mixin collapsed-sidebar {
+  a {
+    width: auto;
+    padding-left: ($sidebar_collapsed_width - 36) / 2;
+    h3 {
+      visibility: hidden;
+
+      opacity: 0;
+    }
+  }
+}
+
+@media (max-width: $screen_md_max) {
+  .root.collapsed {
+    @include collapsed-sidebar;
+  }
+  .root.expanded {
+    @include collapsed-sidebar;
+  }
+}
+
+@media(min-width: $screen_md_max) {
+  .root.collapsed {
+    @include collapsed-sidebar;
+  }
+  .root.expanded {
+    @include expanded-sidebar;
+  }
+}

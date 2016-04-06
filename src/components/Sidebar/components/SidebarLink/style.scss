@@ -1,0 +1,45 @@
+@import "./../../config";
+
+.root {
+  display: flex;
+  flex-direction: row;
+
+  width: $sidebar_width;
+
+  align-items: center;
+
+  .navLink {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    height: 38px;
+    padding: 0 20px;
+
+    color: $text-color;
+    outline: none;
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+    align-items: center;
+
+    i {
+      margin-right: 13px;
+    }
+    span {
+      flex: 1 0 auto;
+    }
+  }
+
+  .isActive {
+    background: $active-item-background-color;
+    &.navLink {
+      color: white;
+    }
+  }
+  &:hover {
+    background: $active-item-background-color;
+  }
+
+}

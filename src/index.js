@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import RedBox from 'redbox-react';
-import 'styles/global';
 
 import DevTools from 'containers/DevTools';
+import RedBox from 'redbox-react';
 
 import configureStore from 'store';
 const store = configureStore();

@@ -1,32 +1,20 @@
-@import "./framework/fonts.scss";
-@import "./framework/variables.scss";
-@import "./framework/mixins.scss";
 
-@import "./framework/avatar.scss";
-@import "./framework/buttons.scss";
-@import "./framework/layout.scss";
-@import "./framework/nav.scss";
+@import "./variables";
+@import "./theme";
 
-$font-family-sans-serif: $regular_font;
-$font-family-monospace:  $monospace_font;
-// $font-size-base: $gl-font-size;
-
-$enable-flex: true;
-@import "~bootstrap/scss/bootstrap.scss";
-// $fa-font-path: "~font-awesome/fonts";
-// @import "~font-awesome/scss/font-awesome.scss";
-
-@import "./gitlab_theme.scss";
-
-// Retro-compatibility with Bootstrap3 styles
-$screen-xs-max: #{map-get($grid-breakpoints, 'sm') - 1};
-$screen-sm-max: #{map-get($grid-breakpoints, 'md') - 1};
-$screen-md-max: #{map-get($grid-breakpoints, 'lg') - 1};
-
-// @import "./../../../components/Navbar/style.scss";
-// @import "./../../../components/Sidebar/style.scss";
-// @import "./../../../containers/Users/style.scss";
-
-.content {
-  color: #222;
+:global(.md-18) {
+  font-size: 18px;
 }
+:global(.md-24) {
+  font-size: 24px;
+}
+:global(.md-36) {
+  font-size: 36px;
+}
+:global(.md-48) {
+  font-size: 48px;
+}
+
+// html {
+//   font-size: calc(112.5% + 0.25vw)
+// }

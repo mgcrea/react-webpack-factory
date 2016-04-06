@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars,spaced-comment */
 import React, {Component, PropTypes} from 'react';
 import Navbar from 'components/Navbar';
 import Sidebar from 'components/Sidebar';
-// import cx from 'classnames';
 import style from './style';
 
 export default class App extends Component {
