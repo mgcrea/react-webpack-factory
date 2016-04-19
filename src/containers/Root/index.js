@@ -7,7 +7,7 @@ export default class Root extends Component {
 
   static propTypes = {
     store: PropTypes.object,
-    routes: PropTypes.array
+    routes: PropTypes.object
   };
 
   render() {

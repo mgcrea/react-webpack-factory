@@ -76,7 +76,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      include: [srcPath, fs.realpathSync(path.join(modulesPath, 'react-toolbox/components')), fs.realpathSync(path.join(modulesPath, 'redux-rest-resource/src'))], // `realpath` is used to support linked modules
+      include: [srcPath, fs.realpathSync(path.join(modulesPath, 'react-toolbox/components'))], // `realpath` is used to support linked modules
       loaders: ['babel']
     }, {
       test: /(\.scss|\.css)$/,
