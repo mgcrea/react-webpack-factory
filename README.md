@@ -10,11 +10,12 @@ Its goal is to closely follow today's best practices to bring both a safer and m
 
 ### Quickstart
 
-1. Clone the project
+1. Clone the project and install dependencies
 
     ```bash
     git clone -o github https://github.com/mgcrea/react-webpack-factory.git sandbox-app
     cd sandbox-app
+    npm i
     ```
 
 2. Just start!
