@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
@@ -8,6 +9,7 @@ const nodeDebug = process.env.NODE_DEBUG || false;
 const isProd = nodeEnv === 'production';
 const isDev = nodeEnv === 'development';
 const srcPath = path.join(__dirname, 'src');
+const modulesPath = path.join(__dirname, 'node_modules');
 
 const plugins = [
   new ExtractTextPlugin('bundle.css', {
@@ -51,7 +53,7 @@ module.exports = {
   noInfo: nodeEnv === 'test',
   entry: {
     bundle: srcPath,
-    vendor: ['react', 'react-dom', 'redux', 'redux-thunk', 'react-redux', 'react-router', 'react-router-redux', 'classnames', 'webpack-hot-middleware/client?quiet=false', 'babel-preset-react-hmre']
+    vendor: ['react', 'react-dom', 'redux', 'redux-thunk', 'react-redux', 'react-router', 'react-router-redux', 'classnames', 'react-hot-loader/patch?quiet=false']
   },
   output: {
     path: path.join(__dirname, isProd ? 'build' : '.tmp'),
@@ -62,12 +64,19 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx', '.json', '.scss'],
     packageMains: ['browser', 'web', 'browserify', 'main', 'style'], // support `style` main field for normalize.css
+    fallback: modulesPath, // support linked modules,
+    alias: {
+      react: fs.realpathSync(path.join(modulesPath, 'react')) // force components to use this local copy
+    },
     root: srcPath
+  },
+  resolveLoader: {
+    fallback: modulesPath // support linked modules
   },
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      include: srcPath,
+      include: [srcPath, fs.realpathSync(path.join(modulesPath, 'react-toolbox/components')), fs.realpathSync(path.join(modulesPath, 'redux-rest-resource/src'))], // `realpath` is used to support linked modules
       loaders: ['babel']
     }, {
       test: /(\.scss|\.css)$/,

@@ -1,48 +1,34 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
-
-import DevTools from 'containers/DevTools';
-import RedBox from 'redbox-react';
+import {render} from 'react-dom';
+import {AppContainer as HotLoaderContainer} from 'react-hot-loader';
 
 import configureStore from 'store';
 const store = configureStore();
 import configureRoutes from 'routes';
+const routes = configureRoutes(store);
+
+import Root from './containers/Root';
 const rootEl = document.getElementById('root');
 
-let render = () => {
-  // const configureRoutes = require('./routes').default;
-  const routes = configureRoutes(store);
-  ReactDOM.render(
-    <Provider store={store}>
-      <div>
-        {routes}
-        {__DEV__ ? <DevTools /> : ''}
-      </div>
-    </Provider>,
-    rootEl
-  );
-};
+render(
+  <HotLoaderContainer
+    component={Root}
+    props={{store, routes}}
+  />,
+  rootEl
+);
 
-if (false && module.hot) {
-  // Support hot reloading of components
-  // and display an overlay for runtime errors
-  const renderApp = render;
-  const renderError = (error) => {
-    ReactDOM.render(
-      <RedBox error={error} />,
+if (__DEV__ && module.hot) {
+  console.warn('in!');
+  module.hot.accept('./containers/Root', () => {
+    console.warn('hot! ./containers/Root');
+    const nextRoot = require('./containers/Root').default;
+    render(
+      <HotLoaderContainer
+        component={nextRoot}
+        props={{store, routes}}
+      />,
       rootEl
     );
-  };
-  render = () => {
-    try {
-      renderApp();
-    } catch (error) {
-      renderError(error);
-    }
-  };
-  // module.hot.accept('./containers/App', render);
-  module.hot.accept('./routes', render);
+  });
 }
-
-render();

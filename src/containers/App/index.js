@@ -24,7 +24,7 @@ export default class App extends Component {
     const {children, routes} = this.props;
     return (
       <section className={style.root}>
-        <Sidebar className={style.sidebar} title="Carlipa Online" expanded={this.state.sidebarExpanded} toggle={::this.toggleSidebar} />
+        <Sidebar className={style.sidebar} title="Sandbox" expanded={this.state.sidebarExpanded} toggle={::this.toggleSidebar} />
         <div className={style.content}>
           <Navbar title="Dashboard" routes={routes} />
           {children}
