@@ -1,6 +1,14 @@
 
-@import "./variables";
+@import "./globals";
 @import "./theme";
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  user-select: none;
+}
 
 :global(.md-18) {
   font-size: 18px;
@@ -13,6 +21,18 @@
 }
 :global(.md-48) {
   font-size: 48px;
+}
+
+:global(.md-spin) {
+  animation: md-spin 2s infinite linear;
+}
+@keyframes md-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
 }
 
 // html {

@@ -27,12 +27,14 @@ class UserForm extends Component {
   componentWillMount() {
     const {actions, params, users} = this.props;
     if (params.userId) {
-      if (users.item && users.item._id.$oid === params.userId) {
+      // Retrieve from users store if already loaded
+      if (users.item && users.item.id === params.userId) {
         this.setState(users.item);
         return;
       }
-      actions.fetchUser(params.userId).then(action => {
-        this.setState(action.item);
+      // Load
+      actions.getUser(params.userId).then(action => {
+        this.setState(action.body);
       });
     }
   }

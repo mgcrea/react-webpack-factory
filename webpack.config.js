@@ -15,7 +15,7 @@ const plugins = [
   new ExtractTextPlugin('bundle.css', {
     allChunks: true
   }),
-  new webpack.optimize.OccurenceOrderPlugin(),
+  // new webpack.optimize.OccurrenceOrderPlugin(), (webpack@1)
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify(nodeEnv),
@@ -34,8 +34,17 @@ switch (nodeEnv) {
   case 'production':
     plugins.push(new webpack.optimize.DedupePlugin());
     plugins.push(new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      output: {
+        comments: false
+      },
+      sourceMap: false
+    }));
+    plugins.push(new webpack.LoaderOptionsPlugin({
       minimize: true,
-      sourceMap: true
+      debug: false
     }));
     break;
   case 'development':
@@ -53,26 +62,31 @@ module.exports = {
   noInfo: nodeEnv === 'test',
   entry: {
     bundle: srcPath,
-    vendor: ['react', 'react-dom', 'redux', 'redux-thunk', 'react-redux', 'react-router', 'react-router-redux', 'classnames', 'react-hot-loader/patch?quiet=false']
+    vendor: ['react', 'react-dom', 'redux', 'redux-thunk', 'react-redux', 'react-router', 'react-router-redux', 'classnames'].concat(isDev ? ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', 'react-hot-loader/patch?quiet=false'] : [])
   },
   output: {
     path: path.join(__dirname, isProd ? 'build' : '.tmp'),
     pathinfo: true,
     filename: '[name].js',
+    chunkFilename: '[name].chunk.js',
     publicPath: '/'
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.json', '.scss'],
-    packageMains: ['browser', 'web', 'browserify', 'main', 'style'], // support `style` main field for normalize.css
-    fallback: modulesPath, // support linked modules,
+    packageMains: ['jsnext:main', 'main', 'style'], // support `style` main field for normalize.css
+    // fallback: modulesPath, // support linked modules (webpack@1)
     alias: {
-      react: fs.realpathSync(path.join(modulesPath, 'react')) // force components to use this local copy
+      react: fs.realpathSync(path.join(modulesPath, 'react')) // force components to always use this local copy
     },
-    root: srcPath
+    // root: srcPath // (webpack@1)
+    modules: [ // (webpack@2)
+      srcPath,
+      'node_modules'
+    ]
   },
-  resolveLoader: {
-    fallback: modulesPath // support linked modules
-  },
+  // resolveLoader: {
+  //   fallback: modulesPath // support linked modules
+  // },
   module: {
     loaders: [{
       test: /\.jsx?$/,
@@ -80,15 +94,18 @@ module.exports = {
       loaders: ['babel']
     }, {
       test: /(\.scss|\.css)$/,
-      loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?sourceMap!toolbox')
+      loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[local]__[path][name]__[hash:base64:5]!postcss!sass?sourceMap')
     }, {
       test: /\.svg$/,
       include: srcPath,
       loaders: ['html']
     }]
   },
-  toolbox: {
-    theme: path.join(srcPath, 'styles', '_theme.scss')
+  sassLoader: {
+    data: [
+      '@import "' + path.resolve(srcPath, 'styles/_theme.scss') + '";', // eslint-disable-line
+      '@import "' + path.resolve(srcPath, 'styles/_globals.scss') + '";' // eslint-disable-line
+    ].join('\n')
   },
   postcss: [autoprefixer({browsers: isProd ? 'last 2 versions' : 'last 2 Chrome versions, last 2 iOS versions'})],
   plugins

@@ -5,7 +5,7 @@ export {UserList, UserForm};
 import React, {Component, PropTypes, cloneElement} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as userActions from './store/actions';
+import {actions as userActions} from './store';
 import {routerActions} from 'react-router-redux';
 
 class UserContainer extends Component {

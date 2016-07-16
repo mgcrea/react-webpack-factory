@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
 
-import users from 'containers/Users/store/reducers';
+import {reducers as users} from 'containers/Users/store';
 
 export default combineReducers({
   routing: routerReducer,

@@ -17,7 +17,6 @@ export default class UserListItem extends Component {
 
   handleDelete(foo, ev) {
     const {user, deleteUser} = this.props;
-    console.warn('foo', foo, ev);
     // deleteUser(user.id, {confirm: ev.target.dataset.confirm});
     // showConfirm({text: ev.target.dataset.confirm}).then(() => {
     //   deleteUser(user.id, {confirm: ev.target.dataset.confirm});
@@ -26,7 +25,6 @@ export default class UserListItem extends Component {
 
   handleSelect(value) {
     const {router, user, deleteUser} = this.props;
-    console.info('router', router);
     switch (value) {
       case 'edit':
         router.push(`/users/${user.id}`);
@@ -51,7 +49,7 @@ export default class UserListItem extends Component {
         <Link to={`/users/${user.id}`} className={style.linkMenu}>
           <IconButton icon="edit" accent />
         </Link>
-        <IconMenu className={style.iconMenu} icon="more_vert" position="top-right" onSelect={::this.handleSelect} menuRipple>
+        <IconMenu className={style.iconMenu} icon="more_vert" position="topRight" onSelect={::this.handleSelect} menuRipple>
           <MenuItem value="edit" icon="edit" caption="Edit" />
           <MenuItem value="download" icon="get_app" caption="Download" />
           <MenuItem value="settings" icon="open_in_browser" caption="Open in app" disabled />

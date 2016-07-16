@@ -22,10 +22,11 @@ export default class Navbar extends Component {
     // var currentRouteName = this.context.router.getCurrentPathname();
     // var currentRoutes = this.context.router.getCurrentRoutes();
     // console.log(currentRouteName, currentRoutes);
+    console.warn('Navbar.render()')
     return (
       <header className={rootClassName}>
         <h1 className={style.title}>{currentRoute.title}</h1>
-        <Counter increment={2} />
+        <Counter increment={-4} />
         <ul className={style.nav}>
           <li className="visible-sm visible-xs">
             <a title="Search" data-toggle="tooltip" data-placement="bottom" data-container="body" href="/search">

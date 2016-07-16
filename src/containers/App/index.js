@@ -24,11 +24,13 @@ export default class App extends Component {
     const {children, routes} = this.props;
     return (
       <section className={style.root}>
-        <Sidebar className={style.sidebar} title="Sandbox" expanded={this.state.sidebarExpanded} toggle={::this.toggleSidebar} />
-        <div className={style.content}>
-          <Navbar title="Dashboard" routes={routes} />
-          {children}
-        </div>
+        <Sidebar className={style.sidebar} title="Sandbox" expanded={this.state.sidebarExpanded} toggle={this.toggleSidebar} />
+        <section className={style.main}>
+          <Navbar title="Dashboard" routes={routes} className={style.navbar} />
+          <section className={style.content}>
+            {children}
+          </section>
+        </section>
       </section>
     );
   }

@@ -24,7 +24,6 @@ class UserList extends Component {
 
   componentDidMount() {
     const {actions} = this.props;
-    // dispatch(fetchPostsIfNeeded(selectedSubreddit))
     actions.fetchUsers();
   }
 

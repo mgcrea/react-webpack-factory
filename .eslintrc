@@ -1,11 +1,19 @@
 {
-  "extends": "mgcrea",
+  "extends": "airbnb",
   "parser": "babel-eslint",
   "globals": {
     __DEV__: false
   },
   "rules": {
-    "no-unused-vars": 0,
-    "react/prefer-stateless-function": 1
+    "react/prefer-stateless-function": 0,
+    "object-curly-spacing": ["error",  "never"],
+    "no-underscore-dangle": ["error", {"allow": ["_id"]}],
+    "no-unused-vars": ["error", {"vars": "all", "args": "none"}],
+    "no-use-before-define": ["error", "nofunc"],
+    "comma-dangle": ["error",  "never"],
+    "max-len": 0
+  },
+  "settings": {
+    "import/resolver": "webpack"
   }
 }
