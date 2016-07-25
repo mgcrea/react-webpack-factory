@@ -12,7 +12,8 @@ const srcPath = path.join(__dirname, 'src');
 const modulesPath = path.join(__dirname, 'node_modules');
 
 const plugins = [
-  new ExtractTextPlugin('bundle.css', {
+  new ExtractTextPlugin({
+    filename: 'bundle.css',
     allChunks: true
   }),
   // new webpack.optimize.OccurrenceOrderPlugin(), (webpack@1)
@@ -94,7 +95,10 @@ module.exports = {
       loaders: ['babel']
     }, {
       test: /(\.scss|\.css)$/,
-      loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[local]__[path][name]__[hash:base64:5]!postcss!sass?sourceMap')
+      loader: ExtractTextPlugin.extract({
+        fallbackLoader: 'style',
+        loader: 'css?sourceMap&modules&importLoaders=1&localIdentName=[local]__[path][name]__[hash:base64:5]!postcss!sass?sourceMap'
+      })
     }, {
       test: /\.svg$/,
       include: srcPath,
